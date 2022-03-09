@@ -40,7 +40,7 @@ public class Client {
             m = (Mensagem) input.readObject();
             
             if(m.getStatus() == Status.OK){
-                System.out.println("Access authorized");
+                if (m.getParam("res") != null) System.out.println("Res: " + m.getParam("res"));
                 while(true){
                     Scanner leitor = new Scanner(System.in);
                     String op;
@@ -50,7 +50,8 @@ public class Client {
                     m = (Mensagem) input.readObject();
                 }
             }else{
-                System.out.println("Erro: " + m.getStatus());
+                System.out.println("Status: " + m.getStatus());
+                if (m.getParam("res") != null) System.out.println("Res: " + m.getParam("res"));
             }
 
             input.close();
