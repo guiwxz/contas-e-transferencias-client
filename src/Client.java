@@ -33,6 +33,8 @@ public class Client {
             
             Mensagem m = new Mensagem(Operacao.CADASTRO);
             
+            List<Usuario> carteiras = new ArrayList<Usuario>();
+            
             while(true){
                 Boolean flagOut = false;
                 Scanner leitor = new Scanner(System.in);
@@ -136,7 +138,7 @@ public class Client {
                 output.flush();
 
                 m = (Mensagem) input.readObject();
-
+                
 
                 switch(m.getOperacao()) {
                     case SALDOREPLY: {
@@ -151,7 +153,7 @@ public class Client {
                         }
                     }
                     case CARTEIRASREPLY: {
-                        List<Usuario> carteiras = (ArrayList<Usuario>) m.getParam("carteiras");
+                        carteiras = (ArrayList<Usuario>) m.getParam("carteiras");
                         
                         if (carteiras != null) {
                             String formated = "\n------------------\n";
@@ -164,6 +166,7 @@ public class Client {
 
                             System.out.println(formated);
                         }
+                        carteiras = null;
                     }
                     case LOGINREPLY:
                     case DEPOSITOREPLY:
